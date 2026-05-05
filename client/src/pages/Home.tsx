@@ -1,25 +1,30 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
-
 /**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
+ * Cribro Parking — Landing Page
+ * Design: "Aerial Calm" — Skandynawski minimalizm z estetyką lotniczą
+ * Colors: Warm white base (#FAFAF8), deep graphite text, calm blue accent, amber CTA
+ * Typography: Satoshi (display) + Inter (body)
  */
-export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
 
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import USPSection from "@/components/USPSection";
+import HowItWorks from "@/components/HowItWorks";
+import AirportsSection from "@/components/AirportsSection";
+import CTASection from "@/components/CTASection";
+import Footer from "@/components/Footer";
+
+export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
+      <Navbar />
+      <main className="flex-1">
+        <HeroSection />
+        <USPSection />
+        <HowItWorks />
+        <AirportsSection />
+        <CTASection />
       </main>
+      <Footer />
     </div>
   );
 }
