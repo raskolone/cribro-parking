@@ -19,7 +19,11 @@ export default function HeroSection() {
       toast("Wybierz lotnisko / Select an airport");
       return;
     }
-    navigate("/search");
+    const params = new URLSearchParams();
+    params.set("airport", airport.toUpperCase());
+    if (arrivalDate) params.set("arrival", arrivalDate);
+    if (departureDate) params.set("departure", departureDate);
+    navigate(`/search?${params.toString()}`);
   };
 
   return (
