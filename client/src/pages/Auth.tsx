@@ -35,7 +35,7 @@ export default function Auth() {
           toast.error(language === "pl" ? "Błąd logowania: " + error.message : "Login error: " + error.message);
         } else {
           toast.success(language === "pl" ? "Zalogowano pomyślnie!" : "Logged in successfully!");
-          navigate("/");
+          navigate("/dashboard");
         }
       } else {
         if (!fullName.trim()) {

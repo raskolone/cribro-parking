@@ -92,9 +92,18 @@ export default function Navbar() {
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-secondary transition-colors"
               >
-                <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
-                  <User className="w-3.5 h-3.5 text-primary" />
-                </div>
+                {user.user_metadata?.avatar_url ? (
+                  <img
+                    src={user.user_metadata.avatar_url}
+                    alt=""
+                    className="w-7 h-7 rounded-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
+                    <User className="w-3.5 h-3.5 text-primary" />
+                  </div>
+                )}
                 <span className="text-sm font-medium text-foreground max-w-[120px] truncate">
                   {user.user_metadata?.full_name || user.email?.split("@")[0]}
                 </span>
@@ -112,13 +121,20 @@ export default function Navbar() {
                       <p className="text-sm font-medium truncate">{user.user_metadata?.full_name || "User"}</p>
                       <p className="text-xs text-muted-foreground truncate">{user.email}</p>
                     </div>
-                    <button
-                      onClick={() => { navigate("/my-reservations"); setUserMenuOpen(false); }}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-secondary transition-colors"
-                    >
-                      <CalendarDays className="w-4 h-4 text-muted-foreground" />
-                      {language === "pl" ? "Moje rezerwacje" : "My reservations"}
-                    </button>
+              <button
+                onClick={() => { navigate("/dashboard"); setUserMenuOpen(false); }}
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-secondary transition-colors"
+              >
+                <User className="w-4 h-4 text-muted-foreground" />
+                {language === "pl" ? "Panel użytkownika" : "Dashboard"}
+              </button>
+              <button
+                onClick={() => { navigate("/my-reservations"); setUserMenuOpen(false); }}
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-secondary transition-colors"
+              >
+                <CalendarDays className="w-4 h-4 text-muted-foreground" />
+                {language === "pl" ? "Moje rezerwacje" : "My reservations"}
+              </button>
                     <button
                       onClick={handleSignOut}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"

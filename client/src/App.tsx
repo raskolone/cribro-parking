@@ -11,6 +11,8 @@ import SearchResults from "./pages/SearchResults";
 import Auth from "./pages/Auth";
 import Booking from "./pages/Booking";
 import MyReservations from "./pages/MyReservations";
+import Dashboard from "./pages/Dashboard";
+import OwnerDashboard from "./pages/OwnerDashboard";
 
 function Router() {
   return (
@@ -18,6 +20,8 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/search"} component={SearchResults} />
       <Route path={"/auth"} component={Auth} />
+      <Route path={"/dashboard"} component={Dashboard} />
+      <Route path={"/owner"} component={OwnerDashboard} />
       <Route path={"/book/:id"} component={Booking} />
       <Route path={"/my-reservations"} component={MyReservations} />
       <Route path={"/404"} component={NotFound} />
