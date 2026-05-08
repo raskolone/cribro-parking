@@ -2,10 +2,13 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 import { supabase } from "@/lib/supabase";
 import type { User, Session } from "@supabase/supabase-js";
 
+type UserRole = "client" | "owner" | "admin";
+
 interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
+  role: UserRole;
   signUp: (email: string, password: string, fullName: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signInWithGoogle: () => Promise<{ error: any }>;
@@ -18,12 +21,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState<UserRole>("client");
 
   useEffect(() => {
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchUserRole(session.user.id);
+      }
       setLoading(false);
     });
 
@@ -32,12 +39,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       (_event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
+        if (session?.user) {
+          fetchUserRole(session.user.id);
+        } else {
+          setRole("client");
+        }
         setLoading(false);
       }
     );
 
     return () => subscription.unsubscribe();
   }, []);
+
+  const fetchUserRole = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", userId)
+        .single();
+
+      if (data?.role) {
+        setRole(data.role as UserRole);
+      } else {
+        setRole("client");
+      }
+    } catch {
+      setRole("client");
+    }
+  };
 
   const signUp = async (email: string, password: string, fullName: string) => {
     const { error } = await supabase.auth.signUp({
@@ -59,7 +89,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signInWithGoogle = async () => {
-    // Redirect to /dashboard after Google OAuth
     const redirectUrl = `${window.location.origin}/dashboard`;
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -72,11 +101,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    setRole("client");
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, session, loading, signUp, signIn, signInWithGoogle, signOut }}
+      value={{ user, session, loading, role, signUp, signIn, signInWithGoogle, signOut }}
     >
       {children}
     </AuthContext.Provider>

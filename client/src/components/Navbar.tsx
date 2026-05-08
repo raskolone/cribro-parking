@@ -1,13 +1,13 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { Plane, Menu, X, User, LogOut, CalendarDays } from "lucide-react";
+import { Plane, Menu, X, User, LogOut, CalendarDays, BarChart3 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "wouter";
 
 export default function Navbar() {
   const { language, setLanguage, t } = useLanguage();
-  const { user, signOut } = useAuth();
+  const { user, role, signOut } = useAuth();
   const [, navigate] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -135,6 +135,15 @@ export default function Navbar() {
                 <CalendarDays className="w-4 h-4 text-muted-foreground" />
                 {language === "pl" ? "Moje rezerwacje" : "My reservations"}
               </button>
+              {(role === "owner" || role === "admin") && (
+                <button
+                  onClick={() => { navigate("/owner"); setUserMenuOpen(false); }}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-secondary transition-colors"
+                >
+                  <BarChart3 className="w-4 h-4 text-muted-foreground" />
+                  {language === "pl" ? "Panel właściciela" : "Owner panel"}
+                </button>
+              )}
                     <button
                       onClick={handleSignOut}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
@@ -191,12 +200,28 @@ export default function Navbar() {
               {user ? (
                 <>
                   <button
+                    onClick={() => { navigate("/dashboard"); setMobileOpen(false); }}
+                    className="text-sm font-medium py-2 text-left flex items-center gap-2"
+                  >
+                    <User className="w-4 h-4" />
+                    {language === "pl" ? "Panel użytkownika" : "Dashboard"}
+                  </button>
+                  <button
                     onClick={() => { navigate("/my-reservations"); setMobileOpen(false); }}
                     className="text-sm font-medium py-2 text-left flex items-center gap-2"
                   >
                     <CalendarDays className="w-4 h-4" />
                     {language === "pl" ? "Moje rezerwacje" : "My reservations"}
                   </button>
+                  {(role === "owner" || role === "admin") && (
+                    <button
+                      onClick={() => { navigate("/owner"); setMobileOpen(false); }}
+                      className="text-sm font-medium py-2 text-left flex items-center gap-2"
+                    >
+                      <BarChart3 className="w-4 h-4" />
+                      {language === "pl" ? "Panel właściciela" : "Owner panel"}
+                    </button>
+                  )}
                   <button
                     onClick={() => { handleSignOut(); setMobileOpen(false); }}
                     className="text-sm font-medium py-2 text-left text-red-600 flex items-center gap-2"

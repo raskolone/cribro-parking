@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import SearchResults from "./pages/SearchResults";
 import Auth from "./pages/Auth";
 import Booking from "./pages/Booking";
+import Confirmation from "./pages/Confirmation";
 import MyReservations from "./pages/MyReservations";
 import Dashboard from "./pages/Dashboard";
 import OwnerDashboard from "./pages/OwnerDashboard";
@@ -23,6 +24,7 @@ function Router() {
       <Route path={"/dashboard"} component={Dashboard} />
       <Route path={"/owner"} component={OwnerDashboard} />
       <Route path={"/book/:id"} component={Booking} />
+      <Route path={"/confirmation/:id"} component={Confirmation} />
       <Route path={"/my-reservations"} component={MyReservations} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />

@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase, Reservation } from "@/lib/supabase";
 import { useLocation } from "wouter";
-import { Calendar, Car, MapPin, CheckCircle2, XCircle, Clock, Loader2 } from "lucide-react";
+import { Calendar, Car, MapPin, CheckCircle2, XCircle, Clock, Loader2, Copy, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
@@ -160,6 +160,23 @@ export default function MyReservations() {
                           </span>
                         </div>
 
+                        {/* Confirmation code */}
+                        {(reservation as any).confirmation_code && reservation.status !== "cancelled" && (
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs text-muted-foreground">{language === "pl" ? "Kod:" : "Code:"}</span>
+                            <span className="font-mono font-bold text-sm text-primary">{(reservation as any).confirmation_code}</span>
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText((reservation as any).confirmation_code);
+                                toast.success(language === "pl" ? "Kod skopiowany!" : "Code copied!");
+                              }}
+                              className="p-1 rounded hover:bg-secondary transition-colors"
+                            >
+                              <Copy className="w-3 h-3 text-muted-foreground" />
+                            </button>
+                          </div>
+                        )}
+
                         <div className="grid sm:grid-cols-2 gap-2 text-sm text-muted-foreground">
                           <div className="flex items-center gap-2">
                             <Calendar className="w-3.5 h-3.5" />
@@ -182,14 +199,25 @@ export default function MyReservations() {
                         <div className="text-right">
                           <span className="font-display font-bold text-xl">{Number(reservation.total_price).toFixed(0)} zł</span>
                         </div>
-                        {reservation.status === "confirmed" && (
-                          <button
-                            onClick={() => cancelReservation(reservation.id)}
-                            className="px-4 py-2 text-xs font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
-                          >
-                            {language === "pl" ? "Anuluj" : "Cancel"}
-                          </button>
-                        )}
+                        <div className="flex items-center gap-2">
+                          {reservation.status === "confirmed" && (
+                            <>
+                              <button
+                                onClick={() => navigate(`/confirmation/${reservation.id}`)}
+                                className="px-3 py-2 text-xs font-medium text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors flex items-center gap-1"
+                              >
+                                <ExternalLink className="w-3 h-3" />
+                                {language === "pl" ? "Szczegóły" : "Details"}
+                              </button>
+                              <button
+                                onClick={() => cancelReservation(reservation.id)}
+                                className="px-3 py-2 text-xs font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
+                              >
+                                {language === "pl" ? "Anuluj" : "Cancel"}
+                              </button>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </motion.div>

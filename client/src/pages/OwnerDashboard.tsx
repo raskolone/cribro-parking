@@ -1,7 +1,7 @@
 /**
  * Owner Dashboard — B2B Panel for Parking Lot Owners
  * Shows incoming reservations, client data, and basic stats.
- * Access: /owner (protected — in production would require owner role)
+ * Access: /owner (protected — requires owner or admin role)
  */
 
 import { useState, useEffect } from "react";
@@ -28,12 +28,15 @@ import {
   Search,
   Filter,
   Loader2,
+  ShieldAlert,
+  Ticket,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
 interface OwnerReservation {
   id: string;
+  confirmation_code: string;
   full_name: string;
   phone: string;
   car_plate: string;
@@ -52,7 +55,7 @@ interface OwnerReservation {
 
 export default function OwnerDashboard() {
   const { language } = useLanguage();
-  const { user, signOut, loading: authLoading } = useAuth();
+  const { user, role, signOut, loading: authLoading } = useAuth();
   const [, navigate] = useLocation();
   const [reservations, setReservations] = useState<OwnerReservation[]>([]);
   const [loading, setLoading] = useState(true);
@@ -64,19 +67,44 @@ export default function OwnerDashboard() {
       navigate("/auth");
       return;
     }
-    if (user) {
-      fetchReservations();
+    if (user && !authLoading) {
+      // Allow access for owners and admins; clients see access denied
+      if (role === "owner" || role === "admin") {
+        fetchReservations();
+      } else {
+        setLoading(false);
+      }
     }
-  }, [user, authLoading]);
+  }, [user, authLoading, role]);
 
   const fetchReservations = async () => {
     setLoading(true);
-    // In production, this would be filtered by owner's parking lots
-    // For now, we show all reservations as a demo
-    const { data, error } = await supabase
+
+    let query = supabase
       .from("reservations")
       .select(`*, parking_lot:parking_lots(id, name, airport_code)`)
       .order("arrival_date", { ascending: true });
+
+    // If owner (not admin), filter by assigned parking lots
+    if (role === "owner") {
+      const { data: assignments } = await supabase
+        .from("parking_lot_owners")
+        .select("parking_lot_id")
+        .eq("user_id", user!.id);
+
+      if (assignments && assignments.length > 0) {
+        const lotIds = assignments.map((a) => a.parking_lot_id);
+        query = query.in("parking_lot_id", lotIds);
+      } else {
+        // Owner with no assigned lots — show empty
+        setReservations([]);
+        setLoading(false);
+        return;
+      }
+    }
+    // Admin sees all reservations
+
+    const { data, error } = await query;
 
     if (error) {
       console.error("Error fetching reservations:", error);
@@ -127,7 +155,8 @@ export default function OwnerDashboard() {
         (r) =>
           r.full_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           r.car_plate.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          r.phone.includes(searchQuery)
+          r.phone.includes(searchQuery) ||
+          (r.confirmation_code && r.confirmation_code.toLowerCase().includes(searchQuery.toLowerCase()))
       )
     : filteredReservations;
 
@@ -139,6 +168,37 @@ export default function OwnerDashboard() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  // Access denied for non-owner/admin users
+  if (role !== "owner" && role !== "admin") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center max-w-md mx-auto px-6"
+        >
+          <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4">
+            <ShieldAlert className="w-8 h-8 text-red-500" />
+          </div>
+          <h1 className="font-display font-bold text-xl mb-2">
+            {language === "pl" ? "Brak dostępu" : "Access Denied"}
+          </h1>
+          <p className="text-muted-foreground mb-6">
+            {language === "pl"
+              ? "Ten panel jest dostępny tylko dla właścicieli parkingów. Jeśli jesteś właścicielem parkingu, skontaktuj się z administratorem w celu przyznania dostępu."
+              : "This panel is only available for parking lot owners. If you are a parking lot owner, contact the administrator to grant access."}
+          </p>
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-all"
+          >
+            {language === "pl" ? "Wróć do panelu klienta" : "Back to client dashboard"}
+          </button>
+        </motion.div>
       </div>
     );
   }
@@ -158,7 +218,9 @@ export default function OwnerDashboard() {
                   Cribro<span className="text-primary"> Parking</span>
                 </span>
                 <span className="ml-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-amber-100 text-amber-700 rounded-full">
-                  {language === "pl" ? "Panel Właściciela" : "Owner Panel"}
+                  {role === "admin"
+                    ? (language === "pl" ? "Admin" : "Admin")
+                    : (language === "pl" ? "Panel Właściciela" : "Owner Panel")}
                 </span>
               </div>
             </div>
@@ -302,13 +364,13 @@ export default function OwnerDashboard() {
             </div>
 
             {/* Search */}
-            <div className="relative w-full sm:w-72">
+            <div className="relative w-full sm:w-80">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={language === "pl" ? "Szukaj (imię, rejestracja, tel.)" : "Search (name, plate, phone)"}
+                placeholder={language === "pl" ? "Szukaj (imię, rejestracja, tel., kod)" : "Search (name, plate, phone, code)"}
                 className="w-full h-10 pl-10 pr-4 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
               />
             </div>
@@ -331,6 +393,9 @@ export default function OwnerDashboard() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-100">
+                    <th className="text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">
+                      {language === "pl" ? "Kod" : "Code"}
+                    </th>
                     <th className="text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider px-4 py-3">
                       {language === "pl" ? "Klient" : "Client"}
                     </th>
@@ -357,6 +422,12 @@ export default function OwnerDashboard() {
                 <tbody>
                   {searchFiltered.map((reservation) => (
                     <tr key={reservation.id} className="border-b border-slate-50 hover:bg-slate-50/50 transition-colors">
+                      <td className="px-4 py-3.5">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-primary/5 text-primary font-mono text-xs font-bold rounded">
+                          <Ticket className="w-3 h-3" />
+                          {reservation.confirmation_code || "—"}
+                        </span>
+                      </td>
                       <td className="px-4 py-3.5">
                         <div>
                           <p className="text-sm font-medium text-foreground">{reservation.full_name}</p>
@@ -447,12 +518,12 @@ export default function OwnerDashboard() {
             </div>
             <div>
               <h3 className="font-semibold text-foreground mb-1">
-                {language === "pl" ? "Panel w wersji demo" : "Demo panel"}
+                {language === "pl" ? "System ról aktywny" : "Role system active"}
               </h3>
               <p className="text-sm text-muted-foreground">
                 {language === "pl"
-                  ? "To jest wersja demonstracyjna panelu właściciela parkingu. W wersji produkcyjnej panel będzie filtrował rezerwacje tylko dla Twoich parkingów, z dodatkowymi funkcjami raportowania i zarządzania cenami."
-                  : "This is a demo version of the parking lot owner panel. In production, the panel will filter reservations only for your parking lots, with additional reporting and pricing management features."}
+                  ? "Panel filtruje rezerwacje na podstawie przypisanych parkingów. Administratorzy widzą wszystkie rezerwacje. Aby przypisać parkingi do właściciela, użyj tabeli parking_lot_owners w Supabase."
+                  : "Panel filters reservations based on assigned parking lots. Admins see all reservations. To assign parking lots to an owner, use the parking_lot_owners table in Supabase."}
               </p>
             </div>
           </div>

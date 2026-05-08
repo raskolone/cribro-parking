@@ -3,6 +3,7 @@
  * Step 1: Parking details + dates
  * Step 2: Customer info form
  * Step 3: Summary + confirm
+ * After confirm → redirect to /confirmation/:id
  */
 
 import { useState, useEffect } from "react";
@@ -81,7 +82,7 @@ export default function Booking() {
 
     setSubmitting(true);
 
-    const { error } = await supabase.from("reservations").insert({
+    const { data, error } = await supabase.from("reservations").insert({
       user_id: user.id,
       parking_lot_id: parkingId,
       arrival_date: arrivalDate,
@@ -92,13 +93,31 @@ export default function Booking() {
       flight_number: flightNumber || null,
       total_price: totalPrice,
       status: "confirmed",
-    });
+    }).select().single();
 
     if (error) {
       toast.error(language === "pl" ? "Błąd rezerwacji: " + error.message : "Booking error: " + error.message);
-    } else {
+    } else if (data) {
+      // Create placeholder notification log entries
+      await supabase.from("notifications_log").insert([
+        {
+          reservation_id: data.id,
+          recipient_email: user.email || "",
+          recipient_type: "client",
+          notification_type: "booking_confirmation",
+          status: "pending",
+        },
+        {
+          reservation_id: data.id,
+          recipient_email: "owner@parking.pl", // placeholder
+          recipient_type: "owner",
+          notification_type: "booking_confirmation",
+          status: "pending",
+        },
+      ]);
+
       toast.success(language === "pl" ? "Rezerwacja potwierdzona!" : "Reservation confirmed!");
-      navigate("/my-reservations");
+      navigate(`/confirmation/${data.id}`);
     }
 
     setSubmitting(false);
