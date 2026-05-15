@@ -89,7 +89,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signInWithGoogle = async () => {
-    const redirectUrl = `${window.location.origin}/dashboard`;
+    // Use production domain for redirect, fallback to window.location.origin for dev
+    const isProduction = window.location.hostname.includes('manus.space');
+    const redirectUrl = isProduction 
+      ? 'https://cribropark-stqjxm4u.manus.space/dashboard'
+      : `${window.location.origin}/dashboard`;
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {

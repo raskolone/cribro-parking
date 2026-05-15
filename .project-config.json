@@ -1,0 +1,35 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [],
+  "dev_command": "pnpm run dev",
+  "env_vars": {},
+  "experiments": null,
+  "git_remote": {
+    "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663629907879/StQjxm4uHx9bBHAEXoKSQR",
+    "access_key_id": "ASIAZV3A2ECZE3OJE4GU",
+    "secret_access_key": "EMZ9nXoqtQUrumGEU6H9hhLHqVmkwCuijONsECvP",
+    "session_token": "IQoJb3JpZ2luX2VjEK3//////////wEaCXVzLWVhc3QtMSJGMEQCIA3wAwfd2nc8STx/vOA4gvG5Mll4jcuKaxx52FAqDj9gAiBxQKX8Z0nDLKnzs1Dx7sAlV+lCSN5uzLzXpuv0uf70uir2Awh2EAQaDDY2NTM4NjA5ODg2NiIM45AWSp3aTiHtRs4ZKtMDuFV3LYLjDPDrbSvIPwfz4Cfk6npED0TchzQlkuBhSoPNAN7nWPiNJ1xkO6gtbdb759th3MngXb9Zb7s42/RMVjjtbEogMKN4oItS7fJtKXU+qA1imTEstsWmj5Zg0YFm8PFpQ/wZ34klLK2bOC1Jeas7NSWI4kQ0B5xrwqcx2Nh0mwfN1FJWjXE6/eiu5DbgFYJyae6gj3fmIy63+MJXKGTzmMM5db1InVtzM69JGbbcdhJQJFl+6tQpUKTrqFJSG8XU61vGIfayrSyTdknkYjReydW9DERjMvkWmMil/9ubCNFBFJ1UUdVNz4Gtn5fclIPFfjh4jCKbCj5r7vKEMcfv/gXtpZt6zXVTzZMg95pCcvnUd7tPJl0kvrqSoeaxyCZUN68eUMQaAkX2QtYodma1GwrFSircM/na1f6Qhb8LcOJeGa0NB+gigI/PfAa9bymcB9DJzndMz9Ss7NZSafAIBWq6vciHdyR7323M4Qy3Dz3gCKyOkvgdRGtcxD7F5bMTRJjHIhqw993H3mbfHqtC/k8zYfZveqFlwqSO1YAivBEf43xvt5xBLlaFAnli5Vun5Uexo9GQz04PyQ7mmDMBYuxo7aGrfrBUB2DKxTNbSZAw+qGc0AY6ngGJjXYGhZoJ+iAasbmlKz866tB/m45AzsD2/vSZHvhzaKkfQZWs6bkA+DIFedkZQaNwEOydk3AjGbGY5ksyXBnkuPfBBGFor9xZQLsgDo/7gKEYh3ErqOYLeWWuLnOffvjjOwOaCHYLqkE0eRigWiJvvgCaFEvcZWLCMQFTWlY4Zauu0fsJqDpfCdoe6F5FLmblvMwfTnmpLd16FNcxwg==",
+    "expiration": "2026-05-16T00:26:34.000Z"
+  },
+  "name": "cribro-parking",
+  "path": "/home/ubuntu/cribro-parking",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "AguCFFCm97d6FeXEragPcF",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "N8KHgyK3CzKjvoM2nmnBoP",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Maciej",
+    "OWNER_OPEN_ID": "9hBgTSF4o7gieQuMhe2x5o",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "a68bff1d-e4da-4c99-8ee7-095d80891ffe",
+    "VITE_APP_ID": "StQjxm4uHx9bBHAEXoKSQR",
+    "VITE_APP_LOGO": "https://files.manuscdn.com/user_upload_by_module/web_dev_logo/310519663629907879/BjankuSYKjkbrPlS.png",
+    "VITE_APP_TITLE": "Cribro Parking",
+    "VITE_FRONTEND_FORGE_API_KEY": "8CMzTu2KBnC7EJryVJbXMz",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-static",
+  "test_command": "pnpm test"
+}
