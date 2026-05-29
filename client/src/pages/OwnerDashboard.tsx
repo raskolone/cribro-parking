@@ -210,13 +210,12 @@ export default function OwnerDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Plane className="w-4 h-4 text-primary-foreground" />
-              </div>
+              <img
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/StQjxm4uHx9bBHAEXoKSQR/parknfly-logo-NBFJLXiBKPmEERqEUbBWG7.webp"
+                alt="Park'n'Fly"
+                className="h-8 w-auto"
+              />
               <div>
-                <span className="font-display font-bold text-lg text-foreground">
-                  Cribro<span className="text-primary"> Parking</span>
-                </span>
                 <span className="ml-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-amber-100 text-amber-700 rounded-full">
                   {role === "admin"
                     ? (language === "pl" ? "Admin" : "Admin")

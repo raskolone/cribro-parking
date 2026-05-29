@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLocation } from "wouter";
-import { Plane, Mail, Lock, User, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
@@ -79,13 +79,12 @@ export default function Auth() {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <a href="/" className="inline-flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-              <Plane className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="font-display font-bold text-xl text-foreground">
-              Cribro<span className="text-primary"> Parking</span>
-            </span>
+          <a href="/" className="inline-flex items-center">
+            <img
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/StQjxm4uHx9bBHAEXoKSQR/parknfly-logo-NBFJLXiBKPmEERqEUbBWG7.webp"
+              alt="Park'n'Fly"
+              className="h-10 w-auto"
+            />
           </a>
         </div>
 

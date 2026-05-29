@@ -1,5 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Plane } from "lucide-react";
+
 import { toast } from "sonner";
 
 export default function Footer() {
@@ -15,13 +15,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Plane className="w-4 h-4 text-primary-foreground" />
-              </div>
-              <span className="font-display font-bold text-lg text-white">
-                Cribro<span className="text-primary-foreground/80"> Parking</span>
-              </span>
+            <div className="flex items-center mb-4">
+              <img
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/StQjxm4uHx9bBHAEXoKSQR/parknfly-logo-NBFJLXiBKPmEERqEUbBWG7.webp"
+                alt="Park'n'Fly"
+                className="h-8 w-auto brightness-0 invert"
+              />
             </div>
             <p className="text-sm text-white/60 leading-relaxed max-w-xs">
               {t("footer.desc")}

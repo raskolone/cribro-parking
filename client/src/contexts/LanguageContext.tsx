@@ -30,8 +30,8 @@ const translations: Translations = {
   "search.freeCancel": { pl: "Bezpłatna anulacja do 24h przed przyjazdem", en: "Free cancellation up to 24h before arrival" },
 
   // USP Section
-  "usp.title": { pl: "Dlaczego Cribro Parking?", en: "Why Cribro Parking?" },
-  "usp.subtitle": { pl: "Łączymy Cię bezpośrednio z zweryfikowanymi parkingami, eliminując pośredników i obniżając ceny.", en: "We connect you directly with verified parking lots, eliminating middlemen and lowering prices." },
+  "usp.title": { pl: "Dlaczego Park'n'Fly?", en: "Why Park'n'Fly?" },
+  "usp.subtitle": { pl: "Łączymy Cię bezpośrednio z zweryfikowanymi parkingami przy lotniskach, eliminując pośredników i obniżając ceny.", en: "We connect you directly with verified airport parking lots, eliminating middlemen and lowering prices." },
   "usp.guarantee.title": { pl: "Gwarancja miejsca", en: "Guaranteed spot" },
   "usp.guarantee.desc": { pl: "Dedykowana pula miejsc zarezerwowana wyłącznie dla naszych klientów. Żadnego overbookingu.", en: "Dedicated pool of spots reserved exclusively for our customers. No overbooking." },
   "usp.price.title": { pl: "Najniższe ceny", en: "Lowest prices" },
@@ -67,14 +67,14 @@ const translations: Translations = {
   "cta.button": { pl: "Zarezerwuj teraz", en: "Book now" },
 
   // Footer
-  "footer.brand": { pl: "Cribro Parking", en: "Cribro Parking" },
-  "footer.desc": { pl: "Portal rezerwacji parkingów lotniskowych. Projekt marki Cribro.", en: "Airport parking reservation portal. A Cribro brand project." },
+  "footer.brand": { pl: "Park'n'Fly", en: "Park'n'Fly" },
+  "footer.desc": { pl: "Portal rezerwacji parkingów lotniskowych przy Katowice-Pyrzowice i Kraków-Balice. Projekt marki Cribro.", en: "Airport parking reservation portal for Katowice-Pyrzowice and Kraków-Balice. A Cribro brand project." },
   "footer.links": { pl: "Przydatne linki", en: "Useful links" },
   "footer.legal": { pl: "Informacje prawne", en: "Legal" },
   "footer.privacy": { pl: "Polityka prywatności", en: "Privacy policy" },
   "footer.terms": { pl: "Regulamin", en: "Terms of service" },
   "footer.cookies": { pl: "Pliki cookies", en: "Cookie policy" },
-  "footer.copyright": { pl: "© 2026 Cribro. Wszelkie prawa zastrzeżone.", en: "© 2026 Cribro. All rights reserved." },
+  "footer.copyright": { pl: "© 2026 Park'n'Fly by Cribro. Wszelkie prawa zastrzeżone.", en: "© 2026 Park'n'Fly by Cribro. All rights reserved." },
 
   // Misc
   "parking.from": { pl: "od", en: "from" },
