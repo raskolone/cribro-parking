@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { Menu, X, User, LogOut, CalendarDays, BarChart3 } from "lucide-react";
+import { ParkNFlyLogo } from "@/components/ParkNFlyLogo";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "wouter";
@@ -32,14 +33,10 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-border/50">
-      <div className="container flex items-center justify-between h-16">
+      <div className="container flex items-center justify-between h-24">
         {/* Logo */}
         <a href="/" className="flex items-center group">
-          <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/StQjxm4uHx9bBHAEXoKSQR/parknfly-logo-NBFJLXiBKPmEERqEUbBWG7.webp"
-            alt="Park'n'Fly"
-            className="h-9 w-auto"
-          />
+          <ParkNFlyLogo height={44} variant="color" showText={true} />
         </a>
 
         {/* Desktop Nav */}

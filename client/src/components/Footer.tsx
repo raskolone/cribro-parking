@@ -1,5 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-
+import { ParkNFlyLogo } from "@/components/ParkNFlyLogo";
 import { toast } from "sonner";
 
 export default function Footer() {
@@ -15,12 +15,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center mb-4">
-              <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/StQjxm4uHx9bBHAEXoKSQR/parknfly-logo-NBFJLXiBKPmEERqEUbBWG7.webp"
-                alt="Park'n'Fly"
-                className="h-8 w-auto brightness-0 invert"
-              />
+            <div className="mb-4">
+              <ParkNFlyLogo height={40} variant="white" showText={true} />
             </div>
             <p className="text-sm text-white/60 leading-relaxed max-w-xs">
               {t("footer.desc")}

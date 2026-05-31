@@ -10,6 +10,7 @@ import { useLocation } from "wouter";
 import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { ParkNFlyLogo } from "@/components/ParkNFlyLogo";
 
 export default function Auth() {
   const { language } = useLanguage();
@@ -79,12 +80,8 @@ export default function Auth() {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <a href="/" className="inline-flex items-center">
-            <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/StQjxm4uHx9bBHAEXoKSQR/parknfly-logo-NBFJLXiBKPmEERqEUbBWG7.webp"
-              alt="Park'n'Fly"
-              className="h-10 w-auto"
-            />
+          <a href="/" className="inline-flex items-center justify-center">
+            <ParkNFlyLogo height={48} variant="color" showText={true} />
           </a>
         </div>
 

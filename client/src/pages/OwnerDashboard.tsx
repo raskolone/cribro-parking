@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { ParkNFlyLogo } from "@/components/ParkNFlyLogo";
 
 interface OwnerReservation {
   id: string;
@@ -210,11 +211,7 @@ export default function OwnerDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/StQjxm4uHx9bBHAEXoKSQR/parknfly-logo-NBFJLXiBKPmEERqEUbBWG7.webp"
-                alt="Park'n'Fly"
-                className="h-8 w-auto"
-              />
+              <ParkNFlyLogo height={36} variant="color" showText={true} />
               <div>
                 <span className="ml-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-amber-100 text-amber-700 rounded-full">
                   {role === "admin"
