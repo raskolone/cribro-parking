@@ -1,5 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Plane, Users, ArrowRight } from "lucide-react";
+import { Plane, Users, ArrowRight, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
@@ -37,7 +37,7 @@ export default function AirportsSection() {
         </motion.div>
 
         {/* Airport Cards */}
-        <div className="grid grid-cols-1 max-w-xl mx-auto gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto gap-8">
           {airports.map((airport, index) => (
             <motion.div
               key={airport.code}
@@ -100,6 +100,30 @@ export default function AirportsSection() {
               </div>
             </motion.div>
           ))}
+
+          {/* Coming Soon Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-10 min-h-[320px]"
+          >
+            <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+              <Clock className="w-7 h-7 text-primary" />
+            </div>
+            <h3 className="font-display font-bold text-xl text-foreground mb-2 text-center">
+              {language === "pl" ? "Więcej lotnisk" : "More airports"}
+            </h3>
+            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-4">
+              {language === "pl" ? "Niebawem" : "Coming soon"}
+            </p>
+            <p className="text-muted-foreground text-sm text-center max-w-xs">
+              {language === "pl"
+                ? "Aktywnie rozszerzamy sieć partnerów. Kolejne lotniska już wkrótce."
+                : "We are actively expanding our partner network. More airports coming soon."}
+            </p>
+          </motion.div>
         </div>
       </div>
     </section>

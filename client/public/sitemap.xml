@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Strona główna -->
+  <url>
+    <loc>https://parknfly.pl/</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://parknfly.pl/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://parknfly.pl/?lang=en"/>
+  </url>
+
+  <!-- Wyniki wyszukiwania — KTW -->
+  <url>
+    <loc>https://parknfly.pl/search?airport=KTW</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>

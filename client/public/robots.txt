@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /booking
+Disallow: /auth
+
+Sitemap: https://parknfly.pl/sitemap.xml
