@@ -17,7 +17,7 @@ const translations: Translations = {
   // Hero
   "hero.tagline": { pl: "Twoja podróż zaczyna się od spokojnego parkowania", en: "Your journey starts with stress-free parking" },
   "hero.title": { pl: "Zarezerwuj miejsce parkingowe przy lotnisku", en: "Book airport parking in seconds" },
-  "hero.subtitle": { pl: "Gwarancja miejsca, najniższe ceny, darmowy transfer na lotnisko. Katowice-Pyrzowice i Kraków-Balice.", en: "Guaranteed spot, lowest prices, free airport shuttle. Katowice-Pyrzowice and Kraków-Balice." },
+  "hero.subtitle": { pl: "Gwarancja miejsca, najniższe ceny, darmowy transfer na lotnisko. Katowice-Pyrzowice (KTW).", en: "Guaranteed spot, lowest prices, free airport shuttle. Katowice-Pyrzowice (KTW)." },
 
   // Search Form
   "search.airport": { pl: "Lotnisko", en: "Airport" },
@@ -53,7 +53,7 @@ const translations: Translations = {
 
   // Airports section
   "airports.title": { pl: "Obsługiwane lotniska", en: "Supported airports" },
-  "airports.subtitle": { pl: "Rozpoczynamy od dwóch największych lotnisk w południowej Polsce", en: "Starting with the two largest airports in southern Poland" },
+  "airports.subtitle": { pl: "Obsługujemy lotnisko Katowice-Pyrzowice (KTW)", en: "We serve Katowice-Pyrzowice Airport (KTW)" },
   "airports.katowice.name": { pl: "Katowice-Pyrzowice", en: "Katowice-Pyrzowice" },
   "airports.katowice.code": { pl: "KTW", en: "KTW" },
   "airports.katowice.desc": { pl: "7,3 mln pasażerów rocznie. Dynamicznie rozwijające się lotnisko regionalne.", en: "7.3M passengers annually. A dynamically growing regional airport." },
@@ -68,7 +68,7 @@ const translations: Translations = {
 
   // Footer
   "footer.brand": { pl: "Park'n'Fly", en: "Park'n'Fly" },
-  "footer.desc": { pl: "Portal rezerwacji parkingów lotniskowych przy Katowice-Pyrzowice i Kraków-Balice. Projekt marki Cribro.", en: "Airport parking reservation portal for Katowice-Pyrzowice and Kraków-Balice. A Cribro brand project." },
+  "footer.desc": { pl: "Portal rezerwacji parkingów lotniskowych przy lotnisku Katowice-Pyrzowice (KTW). Projekt marki Cribro.", en: "Airport parking reservation portal at Katowice-Pyrzowice Airport (KTW). A Cribro brand project." },
   "footer.links": { pl: "Przydatne linki", en: "Useful links" },
   "footer.legal": { pl: "Informacje prawne", en: "Legal" },
   "footer.privacy": { pl: "Polityka prywatności", en: "Privacy policy" },

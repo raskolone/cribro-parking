@@ -7,7 +7,7 @@ import { useLocation } from "wouter";
 
 export default function HeroSection() {
   const { t } = useLanguage();
-  const [airport, setAirport] = useState("");
+  const [airport, setAirport] = useState("ktw");
   const [arrivalDate, setArrivalDate] = useState("");
   const [departureDate, setDepartureDate] = useState("");
 
@@ -15,10 +15,6 @@ export default function HeroSection() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!airport) {
-      toast("Wybierz lotnisko / Select an airport");
-      return;
-    }
     const params = new URLSearchParams();
     params.set("airport", airport.toUpperCase());
     if (arrivalDate) params.set("arrival", arrivalDate);
@@ -90,9 +86,7 @@ export default function HeroSection() {
                   onChange={(e) => setAirport(e.target.value)}
                   className="w-full h-12 px-4 rounded-lg border border-border bg-secondary/50 text-foreground font-medium text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                 >
-                  <option value="">{t("search.selectAirport")}</option>
                   <option value="ktw">{t("search.katowice")}</option>
-                  <option value="krk">{t("search.krakow")}</option>
                 </select>
               </div>
 

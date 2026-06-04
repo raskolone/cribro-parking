@@ -13,15 +13,7 @@ export default function AirportsSection() {
       desc: t("airports.katowice.desc"),
       image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/StQjxm4uHx9bBHAEXoKSQR/katowice-airport-Tq5ZDWbqmxq7jZ65bcj9DR.webp",
       passengers: "7.3M",
-      parkings: "12+",
-    },
-    {
-      name: t("airports.krakow.name"),
-      code: t("airports.krakow.code"),
-      desc: t("airports.krakow.desc"),
-      image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/StQjxm4uHx9bBHAEXoKSQR/krakow-airport-KfCL3WzY4A4iBLbNHWTwgj.webp",
-      passengers: "13.2M",
-      parkings: "20+",
+      parkings: "2+",
     },
   ];
 
@@ -45,7 +37,7 @@ export default function AirportsSection() {
         </motion.div>
 
         {/* Airport Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 max-w-xl mx-auto gap-8">
           {airports.map((airport, index) => (
             <motion.div
               key={airport.code}

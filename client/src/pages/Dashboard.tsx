@@ -178,8 +178,8 @@ export default function Dashboard() {
                   </p>
                   <p className="text-sm text-muted-foreground">
                     {language === "pl"
-                      ? "Zarezerwuj parking przy lotnisku KTW lub KRK"
-                      : "Book parking near KTW or KRK airport"}
+                      ? "Zarezerwuj parking przy lotnisku Katowice-Pyrzowice (KTW)"
+                      : "Book parking at Katowice-Pyrzowice Airport (KTW)"}
                   </p>
                 </div>
                 <ArrowRight className="w-5 h-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />

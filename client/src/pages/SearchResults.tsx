@@ -50,7 +50,7 @@ export default function SearchResults() {
     setLoading(false);
   };
 
-  const airportName = airportCode === "KTW" ? "Katowice-Pyrzowice (KTW)" : "Kraków-Balice (KRK)";
+  const airportName = "Katowice-Pyrzowice (KTW)";
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return "";
